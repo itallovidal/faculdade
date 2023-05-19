@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,21 +9,18 @@
     <link rel="stylesheet" href="./css/style-index.css">
     <script src="https://kit.fontawesome.com/782e4cfd7d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="icon" type="image/png" href="img/icon.svg"/>
-
-
-    <script src="script.js"></script>
     <title>Jardins Do Amanhã!</title>
 </head>
 <body >
-    <div id="nav-principal">
-        <div class="mobile-container">
-            <span>Jardins Do Amanhã</span>
-            <i onclick="expNav()"  class="fa-solid fa-bars"></i>
+    <div id="container-nav">
+        <div id="nav-mobile">
+            <span>Jardins Do Amanhã </span>
+            <i id="btn-openNav" class="fa-solid fa-bars"></i>
         </div>
 
-        <nav class="">
+        <nav>
+            <i id="btn-closeNav" class="fa-solid fa-x"></i>
             <a href="./index.html">Home</a>
             <a href="./gallery.html">Jardins</a>
             <a href="./form.html">Contate-nos</a>
@@ -69,15 +64,13 @@
             <h1>Trabalhos</h1>
 
             <div id="container-fotos">
-                <img class="" src="./img/pic1.jpg" alt="">
-                <img class="" src="./img/pic2.jpg" alt="">
-                <img class="" src="./img/pic3.jpg" alt="">
+                <img data-img="0" class="" src="./img/pic1.jpg" alt="">
+                <img data-img="1" class="mobile-img" src="./img/pic2.jpg" alt="">
+                <img data-img="2" class="mobile-img" src="./img/pic3.jpg" alt="">
             </div>
 
             <div id="container-slider">
-                <button onclick="mudafoto(0)"></button>
-                <button onclick="mudafoto(1)"></button>
-                <button onclick="mudafoto(2)"></button>
+                <h3>Arraste para qualquer lado para ver mais!</h3>
             </div>
 
             <a class="btn-style" id="vermais" href="./gallery.html">Ver Mais</a>
@@ -93,5 +86,7 @@
             <a href="./form.html">Contate-nos</a>
         </nav>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

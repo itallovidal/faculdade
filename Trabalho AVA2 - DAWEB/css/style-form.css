@@ -7,9 +7,10 @@ main article
     margin-top: 150px;
     margin-bottom: 3%;
     align-items: center;
+    height: 60vh;
+    overflow: hidden;
     /* background: blue; */
 }
-
 main article img{
     width: 35%;
     max-height: 100%;
@@ -87,6 +88,8 @@ main article form #container-desc #desc{
     main article {
         flex-direction: column-reverse;
         width: 100%;
+        height: fit-content;
+        margin-bottom: 0 ;
     }
 
     main article form{

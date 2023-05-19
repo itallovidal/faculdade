@@ -1,129 +1,53 @@
-function checagemTamanho(){
-    let largura = window.innerWidth
+const btn_openNav = document.querySelector('#btn-openNav')
+const btn_closeNav = document.querySelector('#btn-closeNav')
+const nav = document.querySelector('nav')
 
-    if(largura > 501)
-    {
-        return true
-    }
-    else
-    {
-        return false
-    }
+function changeNav(){
+    nav.classList.toggle('nav-ativa')
 }
 
-window.onload = function(){
-    let desktop = document.querySelector("#nav-principal nav")
-    let mobile = document.querySelector(".mobile-container")
-    
-    if(checagemTamanho() == true){
-        mobile.classList.add("desativado")
-        resizeFotos(true)
-    }
+btn_openNav.addEventListener('click', changeNav)
+btn_closeNav.addEventListener('click', changeNav)
 
-    else{
-        desktop.classList.add("desativado")
-        resizeFotos(false)
-    }
-}
+////////////////////
 
-window.onresize = function(){
-    let desktop = document.querySelector("#nav-principal nav")
-    let mobile = document.querySelector(".mobile-container")    
-    let fotos = document.querySelectorAll('#container-trabalhos img')
+const imgs = Array.from(document.querySelectorAll('#container-fotos img'))
 
-    if(checagemTamanho() == true){
-        if(desktop.classList.contains("desativado") == true)
-        {
-            desktop.classList.toggle("desativado")
-            mobile.classList.toggle("desativado")
+let touchstartX = 0
+let touchendX = 0
+
+
+
+
+imgs.forEach((img)=>{
+    img.addEventListener('touchstart', carrouselHandler)
+})
+
+function carrouselHandler(e){
+    function changeImage(actualImage) {
+        let imgNumber = Number(actualImage.getAttribute('data-img'))
+
+        if (touchendX < touchstartX) {
+            imgNumber + 1 > 2 ? imgNumber = 1 : imgNumber += 1
         }
-        else if(mobile.classList.contains("desativado") != true){
-            mobile.classList.toggle("desativado")
-
-        }
-    }
-
-    else{
-        if( mobile.classList.contains("desativado") == true)
-        {
-            mobile.classList.toggle("desativado")
-            desktop.classList.toggle("desativado")
-        }
-    }
-
-    if(fotos.length != 0 ){
-        if(checagemTamanho() == true){
-            resizeFotos(true)
-        }
-        else
-        {
-            resizeFotos(false)
-        }
-    }
-
-}
-
-function expNav(){
-    let navbar = document.getElementsByTagName("nav")[0]
-    navbar.classList.toggle("desativado")
-}
-
-// --------------------------------------
-
-
-function mudafoto(mostrar){
-    let fotoAtiva = document.querySelector("#container-fotos img:not(.desativado)")
-    let fotos = document.querySelectorAll("#container-fotos img")
-    console.log(fotos);
-    
-    fotoAtiva.classList.add("desativando")
-    
-    setTimeout(function(){
-        fotoAtiva.classList.remove("desativando")
-        fotoAtiva.classList.add("desativado")
-
-        fotos[mostrar].classList.remove("desativado")
-    }, 505)
-}
-
-function resizeFotos(valor){
-
-    let fotos = document.querySelectorAll('#container-trabalhos img')
-
-    if(fotos.length != 0 ){
-        console.log("pag. index");
-        // console.log(fotos);
-
-        if(valor == true)
-        {
-            console.log("versão desktop")
-            fotos.forEach( i => {
-                i.classList.remove("desativado")
-            });
-        }
-    
         else{
-            console.log("versão mobile")
-    
-            for (let i = 1; i < fotos.length; i++) {
-                const element = fotos[i]
-                console.log(element)
-                element.classList.add("desativado")
-            }
+            imgNumber - 1 < 0 ? imgNumber = 2 : imgNumber -= 1
         }
+
+        actualImage.classList.add('desativando')
+
+        actualImage.addEventListener('animationend', ()=>{
+            actualImage.classList.add('mobile-img')
+            imgs[imgNumber].classList.remove('mobile-img')
+            actualImage.classList.remove('desativando')
+        }, {once: true})
     }
+
+    touchstartX = e.changedTouches[0].screenX
+
+    e.target.addEventListener('touchend', (e)=>{
+        touchendX = e.changedTouches[0].screenX
+
+        changeImage(e.target)
+    })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
